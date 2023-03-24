@@ -6,13 +6,13 @@
  
 # Compute paths
 if(1)
-    set(DMujo_INCLUDE_DIR "C:/Program Files (x86)/7P2_Robot_Sim/DMujo/include")
+    set(DMujo_INCLUDE_DIR "D:/_pkg/DPackages/DMujo/include")
+endif()
+if(1)
+    set(DMujo_LIB_DIR     "D:/_pkg/DPackages/DMujo/lib"    )
 endif()
 if(0)
-    set(DMujo_LIB_DIR     "C:/Program Files (x86)/7P2_Robot_Sim/DMujo/lib"    )
-endif()
-if(0)
-    set(DMujo_SRC_DIR     "C:/Program Files (x86)/7P2_Robot_Sim/DMujo/src"    )
+    set(DMujo_SRC_DIR     "D:/_pkg/DPackages/DMujo/src"    )
 endif()
 
 # set paths
