@@ -206,9 +206,6 @@ DMujoSim_BINARY_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib/build
 //The directory containing a CMake configuration file for DMujoSim.
 DMujoSim_DIR:PATH=D:/_pkg/DPackages/DMujoSim/share/DMujoSim
 
-//Dependencies for the target
-DMujoSim_LIB_DEPENDS:STATIC=general;DMujoSim.lib;general;glfw3.lib;general;mujoco200.lib;
-
 //Value Computed by CMake
 DMujoSim_SOURCE_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib
 

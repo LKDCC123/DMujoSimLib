@@ -26,7 +26,7 @@ if(${PKG_NAME}_LIB_ON)
     aux_source_directory(${CMAKE_SOURCE_DIR}/src SRC_FILES)
     aux_source_directory(${CMAKE_SOURCE_DIR}/include SRC_FILES)
     add_library(${PROJECT_NAME} STATIC ${SRC_FILES} )
-    target_link_libraries(${PROJECT_NAME} PUBLIC DMujoSim.lib glfw3.lib mujoco200.lib)
+    # target_link_libraries(${PROJECT_NAME} PUBLIC DMujoSim.lib glfw3.lib mujoco200.lib)
     install(FILES ${PROJECT_BINARY_DIR}/Release/${PROJECT_NAME}.lib 
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${PKG_NAME}/lib)
     install(FILES ${CMAKE_SOURCE_DIR}/bin/glfw3.lib 
