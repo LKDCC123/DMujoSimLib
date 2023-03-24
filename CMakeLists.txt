@@ -1,35 +1,44 @@
 cmake_minimum_required(VERSION 3.0)
-project(7P2_Robot_Sim)
+project(DMujoSim)
 
-set(ROOT_PATH .)
+message("${CMAKE_PREFIX_PATH}")
 
-include_directories( # 库头文件
-    
+find_package(DMujoMk)
+find_package(DBase)
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
 )
 
 link_directories(
-    "SimulationLib/Mujocolib/bin"
+    ${CMAKE_SOURCE_DIR}/bin
 )
 
-aux_source_directory("SimulationLib" Dir_Sim)
-aux_source_directory("SimulationLib/CRemotelib" Dir_Sim)
-aux_source_directory("SimulationLib/Mujocolib" Dir_Sim)
-aux_source_directory("SimulationLib/Mujocolib/include" Dir_Sim)
-add_executable(Sim_process BHR7P2RobSim.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameCpp2C.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameLogger.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameSaveLog.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameSwitch.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/FullDoFIK.cpp
-    BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/RobotState.cpp
-    ${Dir_Sim} ${Dir_Eigen} ${Dir_ChzFm} ${Dir_DccLib} ${Dir_Lib}
+aux_source_directory(${CMAKE_SOURCE_DIR}/src SRC_TEST)
+aux_source_directory(${CMAKE_SOURCE_DIR}/include SRC_TEST)
+
+add_executable(Test
+    Test.cpp
+    ${SRC_TEST}
 )
 
-target_compile_definitions(Sim_process PUBLIC -DMAX_EXT_API_CONNECTIONS=255 -DNON_MATLAB_PARSING -DDO_NOT_USE_SHARED_MEMORY -D_CRT_SECURE_NO_WARNINGS)
-target_compile_options(Sim_process PUBLIC /nologo /Ox /O2 /Ot /W3 /WX- /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Gd /openmp- /Gd /analyze- /errorReport:prompt /openmp- /EHsc /arch:AVX /I../include /Fe../bin/)
-target_link_libraries(Sim_process PUBLIC glfw3.lib mujoco200.lib) 
+target_compile_definitions(Test PUBLIC
+    _CRT_SECURE_NO_WARNINGS
+    NDEBUG
+    UNICODE
+    CONSOLE
+)
 
-file(COPY "${ROOT_PATH}/SimulationLib/Mujocolib/bin/mjkey.txt" DESTINATION "..")
-file(COPY "${ROOT_PATH}/SimulationLib/Mujocolib/bin/glfw3.dll" DESTINATION "Release") 
-file(COPY "${ROOT_PATH}/SimulationLib/Mujocolib/bin/mujoco200.dll" DESTINATION "Release") 
-file(COPY "${ROOT_PATH}/SimulationLib/Mujocolib/bin/mujoco200nogl.dll" DESTINATION "Release") 
+target_compile_options(Test PUBLIC
+    /nologo
+)
+
+target_link_options(Test PUBLIC
+    glfw3.lib
+    mujoco200.lib
+)
+
+file(COPY ${CMAKE_SOURCE_DIR}/bin/mjkey.txt DESTINATION ${PROJECT_BINARY_DIR}/Release)
+
+# if install
+include(config.cmake)

@@ -1,0 +1,78 @@
+Fri Mar 24 18:26:01 2023
+ERROR: Could not open activation key file mjkey.txt
+
+Fri Mar 24 18:52:29 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.3560.
+
+Fri Mar 24 18:55:38 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.3560.
+
+Fri Mar 24 18:56:08 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2480.
+
+Fri Mar 24 18:57:30 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2480.
+
+Fri Mar 24 18:57:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Fri Mar 24 18:57:42 2023
+ERROR: Missing or invalid license activation
+
+Fri Mar 24 19:07:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.3560.
+
+Fri Mar 24 19:08:01 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:08:02 2023
+WARNING: Pre-allocated constraint buffer is full. Increase njmax above 200. Time = 0.1400.
+
+Fri Mar 24 19:09:15 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:10:43 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:10:54 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:10:55 2023
+WARNING: Pre-allocated constraint buffer is full. Increase njmax above 200. Time = 0.1400.
+
+Fri Mar 24 19:11:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:11:36 2023
+WARNING: Pre-allocated constraint buffer is full. Increase njmax above 200. Time = 0.1400.
+
+Fri Mar 24 19:13:31 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2720.
+
+Fri Mar 24 19:14:56 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2720.
+
+Fri Mar 24 19:26:43 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:27:07 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 19:28:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.2960.
+
+Fri Mar 24 20:24:06 2023
+ERROR: Missing or invalid license activation
+
+Fri Mar 24 20:34:43 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.3840.
+
+Fri Mar 24 20:34:50 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.3840.
+
+Fri Mar 24 20:35:04 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.7000.
+
+Fri Mar 24 20:36:16 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0240.
+

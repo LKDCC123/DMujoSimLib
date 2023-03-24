@@ -8,62 +8,14 @@
 
 #ifndef MUJICOBHR_LIB_CPP
 #define MUJICOBHR_LIB_CPP
-#include "MujocoBHR_api.h"
-#include "../Mj_DataExchange.h"
-extern "C" {
-    #include "../../BHR7P1_Run_Team_7P2_cmake_multithread/Dcc_lib/Base/dcc_con_base.h"
-    #include "../../BHR7P1_Run_Team_7P2_cmake_multithread/Dcc_lib/Base/dcc_Math.h"
-}
-#include "../BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/RobotState.h"
-#include "../BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameSwitch.h"
-#include "../BHR7P1_Run_Team_7P2_cmake_multithread/ChzFrame/ChzFrameCpp2C.h"
+#include "../include/MujocoBHR_api.h"
 
 //-------------------------------- global -----------------------------------------------
 // blocks
-const double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
+// double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
 
 // constants
-const int nJointsNum = 15;
-const double ControlT = 0.004;
-const double _dFcSensorDirection[50] = { -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, // left force sensor 
-                                         -1.0, -1.0, -1.0, 1.0, 1.0, 1.0 // right force sensor
-                                         };
-
-// joints control
-const double _dJointsGear[50] = { 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
-const double _dJointsDirection[50] = { 1.0, -1.0, -1.0, // waist yaw, left arm, right arm
-                                       1.0, -1.0, 1.0, 1.0, 1.0, -1.0, // left leg
-                                       1.0, -1.0, 1.0, 1.0, 1.0, -1.0 // right leg
-                                       };
-const double _dJointsInitPos[50] = { 0.0, 0.0, 0.72, // trunk position
-                                     0.0, 0.0, 0.0, 0.0, // trunk quaternion
-                                     0.0, 0.0, 0.0, // waist yaw, left arm, right arm
-                                     0.0, 0.0, DccD2R(-12.5), DccD2R(25.0), DccD2R(-12.5), 0.0, // left leg
-                                     0.0, 0.0, DccD2R(-12.5), DccD2R(25.0), DccD2R(-12.5), 0.0 // right leg 
-                                     };
-const double dKp = -0.7;
-const double dKd = -0.002;
-double dJointTarget[50] = { 0.0 }, dJointTargetOld[50] = { 0.0 };
-
-// data re
-FILE *FILEMjptDataRecord;
-int nMjMaxColumn = 500;
-float fMjDataRecord[10000000L];
-int nMjDataStartCount = 0;
-extern "C" int ChzLogNum;
-char * cptMjFileName = "DCC_Mj.dat";
-
-// sim api
-double dRotMat[9];
-double dptJointsPosition[50] = { 0.0 };
-double dptJointsVelocity[50] = { 0.0 };
-double dptGyroSensor[2][3] = { 0.0 };
-double dptAccSensor[3] = { 0.0 }; 
-double dptFootFT[10][6] = { 0.0 };
-int k_pre = 0;
-double dptCmdJointsPosition[50] = { 0.0 };
-
-// constants
+double dJointGear = 100.0;
 const int maxgeom = 5000;           // preallocated geom array in mjvScene
 const double syncmisalign = 0.1;    // maximum time mis-alignment before re-sync
 const double refreshfactor = 0.7;   // fraction of refresh available for simulation
@@ -1724,86 +1676,21 @@ void render(GLFWwindow* MJwindow) // render im main thread (while simulating in 
     glfwSwapBuffers(MJwindow);
 }
 
-char MjLogName[500][30] = { 0 };
-void MjSetLogName_default(int cnt, int k, char* logname, char mode[], int i)
-{
-	if (cnt != 1) return;
-	strcat(MjLogName[k], logname);
-	if (!strcmp(mode, "num"))
-	{
-		char stemp[2] = "1"; stemp[0] = (char)(i + '1');
-		strcat(MjLogName[k], stemp);
-	}
-	else if (!strcmp(mode, "pos"))
-	{
-		char stemp[2] = "1"; stemp[0] = (char)(i + 'x');
-		strcat(MjLogName[k], stemp);
-	}
-	else if (!strcmp(mode, "rot"))
-	{
-		if (i == 0) strcat(MjLogName[k], ".pitch");
-		if (i == 1) strcat(MjLogName[k], ".row");
-		if (i == 2) strcat(MjLogName[k], ".yaw");
-	}
-	else if (!strcmp(mode, "posrot"))
-	{
-		if (i == 0) strcat(MjLogName[k], ".x");
-		if (i == 1) strcat(MjLogName[k], ".y");
-		if (i == 2) strcat(MjLogName[k], ".z");
-		if (i == 3) strcat(MjLogName[k], ".pitch");
-		if (i == 4) strcat(MjLogName[k], ".row");
-		if (i == 5) strcat(MjLogName[k], ".yaw");
-	}
-}
-#define MjSetLogName(a, b, c) MjSetLogName_default(cycle_cnt, nDataStartTemp, a, b, c)
-
-void fnvMjDataRecording() {
-	int nDataStartTemp = 0;
-	int i, j;
-	float *fptDataBuff = NULL;
-	static int cycle_cnt = 0;
-	fptDataBuff = &fMjDataRecord[nMjDataStartCount];
-
-	if (cycle_cnt++ >= 10) cycle_cnt = 10;
-
-	// ********************************************************** Default Data ****************************************************************
-	//chzlog
-	for (i = 0; i < ChzLogNum; i++, nDataStartTemp++)
-	{
-		if (ChzFrame::FrameHandler.N_Control() == i + 10) strcat(MjLogName[nDataStartTemp], ChzLogNames[i]);
-		fptDataBuff[nDataStartTemp] = ChzLogVals[i];
-	}
-
-
-	if (nDataStartTemp > nMjMaxColumn) {
-		printf("Error: Too many data to save!!\n");
-	}
-	nMjDataStartCount += nMjMaxColumn;
-}
-
-void fnvMjDataWrite(const char *cptFileName) {
-	int i, j;
-	if ((fopen_s(&FILEMjptDataRecord, cptFileName, "w")) != 0) {
-		printf("Failed to write recording data file!!\n");
-	}
-	else {
-		for (j = 0; j < nMjMaxColumn; j++) {
-			fprintf(FILEMjptDataRecord, "%s\t", MjLogName[j]);
-		}
-		fprintf(FILEMjptDataRecord, "\n");
-		for (i = 0; i < nMjDataStartCount / nMjMaxColumn; i++) {
-			for (j = 0; j < nMjMaxColumn; j++) {
-				fprintf(FILEMjptDataRecord, "%f\t", fMjDataRecord[i * nMjMaxColumn + j]);
-			}
-			fprintf(FILEMjptDataRecord, "\n");
-		}
-		fclose(FILEMjptDataRecord);
-		printf("Data saved in %s !!\n", cptFileName);
-	}
-}
-
 // simulation main loop fnc
-void fnvMujocoSimuLoop(void) // simulate in background thread (while rendering in main thread), your control should be added in this function
+void fnvMujocoSimuLoop(
+    int nJointNum,
+    double _dJointsInitPos[], 
+    double dptJointsPosition[], 
+    double dptJointsVelocity[], 
+    int nIMUNum,
+    double dRotMat[][9],
+    int nFSNum,
+    double dptFootFT[][6],
+    double dptCmdJointsPosition[],
+    double _dJointsDirection[],
+    int * nKpre,
+    void (* pfLoop)(void)
+    ) // simulate in background thread (while rendering in main thread), your control should be added in this function
 {
     // cpu-sim syncronization point
     double cpusync = 0;
@@ -1864,27 +1751,19 @@ void fnvMujocoSimuLoop(void) // simulate in background thread (while rendering i
                         mjv_applyPerturbForce(m, d, &pert);
 
                         // online control for BHR s --------------------------------------------------------------------
-                        if(k_pre == 0) {
-                            for(int i = 1; i < m->nq + 7; i++) d->qpos[i] = _dJointsInitPos[i]; // init joints
-                            d->qpos[7 + nJointsNum] = nBlockPosi[0], d->qpos[7 + nJointsNum + 1] = nBlockPosi[1], d->qpos[7 + nJointsNum + 2] = nBlockPosi[2]; // init block
+                        if(*nKpre == 0) {
+                            for(int i = 1; i < 7; i++) d->qpos[i] = _dJointsInitPos[i]; // init floating base
+                            for(int i = 7; i < m->nq + 7; i++) d->qpos[i] = _dJointsInitPos[i] * _dJointsDirection[i - 7]; // init joints
+                            // d->qpos[7 + nJointNum] = nBlockPosi[0], d->qpos[7 + nJointNum + 1] = nBlockPosi[1], d->qpos[7 + nJointNum + 2] = nBlockPosi[2]; // init block
                         }
                         for(int i = 7; i < m->nq + 7; i++) dptJointsPosition[i - 7] = d->qpos[i], dptJointsVelocity[i - 7] = d->qvel[i]; // read joints
-                        for(int i = 0; i < 3; i++) for(int j = 0; j < 3; j++) *(dRotMat + 3 * i + j) = d->site_xmat[3 * i + j]; // read trunk rot mat
-                        double dEulDcc[3] = { 0.0 };
-                        fnvSO2Eul(dRotMat, dEulDcc);
-                        dptGyroSensor[0][1] = dEulDcc[0]; // process IMU pitch
-                        dptGyroSensor[0][0] = dEulDcc[1]; // process IMU roll
-                        dptGyroSensor[0][2] = dEulDcc[2]; // process IMU yaw
-                        for(int i = 0; i < 6; i++) {
-                            dptFootFT[0][i] = d->sensordata[i] * _dFcSensorDirection[i]; // right footft
-                            dptFootFT[1][i] = d->sensordata[i + 6] * _dFcSensorDirection[i + 6]; // left footft
-                        }
-                        fndMjDataExchange(dptJointsPosition, dptJointsVelocity, dptGyroSensor, dptFootFT, k_pre, dptCmdJointsPosition); // online controllers
-                        for(int i = 0; i < m->nq; i++) d->ctrl[i] = dptCmdJointsPosition[i] * _dJointsGear[i] * _dJointsDirection[i]; // send joints
-                        k_pre++;
+                        for(int i = 0; i < nIMUNum; i++) for(int j = 0; j < 9; j++) dRotMat[i][j] = d->site_xmat[i * 9 + j]; // read trunk rot mat
+                        for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[0][j] = d->sensordata[j]; // read footft
+                        pfLoop(); // online control loop
+                        for(int i = 0; i < m->nq; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 
+                        *nKpre += 1;
                         // online control for BHR e --------------------------------------------------------------------
-                        // Data Re
-                        fnvMjDataRecording();
+                    
                         // run mj_step
                         mjtNum prevtm = d->time;
                         mj_step(m, d);
@@ -2019,8 +1898,6 @@ void fnvMujocoRenderLoop() { // loop for render
 }
 
 void fnvMujocoSimuEnd() { // stop simulation thread
-    // Data Write
-    fnvMjDataWrite(cptMjFileName); 
     // delete everything we allocated
     uiClearCallback(MJwindow);
     mj_deleteData(d); 

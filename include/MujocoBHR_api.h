@@ -8,8 +8,8 @@
 #endif
 
 //-------------------------------- include -----------------------------------------------
-#include "include/mjxmacro.h"
-#include "include/uitools.h" // including "mujoco.h" (dynamix) & "glfw3.h" (visualization)
+#include "mjxmacro.h"
+#include "uitools.h" // including "mujoco.h" (dynamix) & "glfw3.h" (visualization)
 #include "string.h"
 #include "stdio.h"
 #include <thread>
@@ -55,10 +55,23 @@ Extern struct
 
     // rendering: need sync
     int camera = 0;
-} settings;
+}settings;
 
 void fnvMujocoSimuInit(int nPreDefMod, const char* ctpModName);
-void fnvMujocoSimuLoop(void);
+void fnvMujocoSimuLoop(
+    int nJointNum,
+    double _dJointsInitPos[], 
+    double dptJointsPosition[], 
+    double dptJointsVelocity[], 
+    int nIMUNum,
+    double dRotMat[][9],
+    int nFSNum,
+    double dptFootFT[][6],
+    double dptCmdJointsPosition[],
+    double _dJointsDirection[],
+    int * nKpre,
+    void (* pfLoop)(void)
+    );
 void fnvMujocoRenderLoop(void);
 void fnvMujocoSimuEnd(void);
 
