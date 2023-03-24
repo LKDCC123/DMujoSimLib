@@ -61,10 +61,4 @@ add_executable(TestLib
     Test.cpp
 )
 
-target_link_libraries(TestLib PUBLIC
-    glfw3.lib
-    mujoco200.lib
-    DMujoSim.lib
-)
-
 endif()

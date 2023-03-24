@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "MinSizeRel/TestLib.exe"
+			"path" : "Release/TestLib.exe"
 		},
 		{
-			"path" : "MinSizeRel/TestLib.pdb"
+			"path" : "Release/TestLib.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -16,7 +16,6 @@
 			"add_executable",
 			"link_directories",
 			"find_package",
-			"target_link_libraries",
 			"include_directories"
 		],
 		"files" : 
@@ -54,12 +53,6 @@
 				"parent" : 3
 			},
 			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 64,
-				"parent" : 0
-			},
-			{
 				"command" : 2,
 				"file" : 0,
 				"line" : 56,
@@ -67,13 +60,13 @@
 			},
 			{
 				"file" : 2,
-				"parent" : 6
+				"parent" : 5
 			},
 			{
-				"command" : 4,
+				"command" : 3,
 				"file" : 2,
 				"line" : 21,
-				"parent" : 7
+				"parent" : 6
 			},
 			{
 				"command" : 2,
@@ -83,16 +76,16 @@
 			},
 			{
 				"file" : 3,
+				"parent" : 8
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 21,
 				"parent" : 9
 			},
 			{
-				"command" : 4,
-				"file" : 3,
-				"line" : 21,
-				"parent" : 10
-			},
-			{
-				"command" : 4,
+				"command" : 3,
 				"file" : 1,
 				"line" : 21,
 				"parent" : 3
@@ -105,21 +98,21 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG  "
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG  "
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 8,
+					"backtrace" : 7,
 					"path" : "D:/_pkg/DPackages/DMujoMk/include"
 				},
 				{
-					"backtrace" : 11,
+					"backtrace" : 10,
 					"path" : "D:/_pkg/DPackages/DBase/include"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 11,
 					"path" : "D:/_pkg/DPackages/DMujoSim/include"
 				}
 			],
@@ -142,7 +135,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
 				"role" : "flags"
 			},
 			{
@@ -155,18 +148,18 @@
 				"role" : "libraryPath"
 			},
 			{
-				"backtrace" : 5,
+				"backtrace" : 1,
+				"fragment" : "DMujoSim.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 1,
 				"fragment" : "glfw3.lib",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 5,
+				"backtrace" : 1,
 				"fragment" : "mujoco200.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 5,
-				"fragment" : "DMujoSim.lib",
 				"role" : "libraries"
 			},
 			{
