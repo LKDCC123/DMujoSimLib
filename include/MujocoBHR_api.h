@@ -65,6 +65,7 @@ void fnvMujocoSimuLoop(
     double dptJointsVelocity[], 
     int nIMUNum,
     double dRotMat[][9],
+    double dIMU[][3],
     int nFSNum,
     double dptFootFT[][6],
     double dptCmdJointsPosition[],

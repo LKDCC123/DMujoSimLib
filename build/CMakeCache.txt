@@ -14,12 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//Value Computed by CMake
-7P2_Robot_Sim_BINARY_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib/build
-
-//Value Computed by CMake
-7P2_Robot_Sim_SOURCE_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib
-
 //Semicolon separated list of supported configuration types, only
 // supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything
 // else will be ignored.
@@ -80,7 +74,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=D:/_pkg/DPackages
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/DMujoSim
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/bin/Hostx64/x64/link.exe
@@ -197,26 +191,11 @@ DBase_DIR:PATH=D:/_pkg/DPackages/DBase/share/DBase
 //The directory containing a CMake configuration file for DMujoMk.
 DMujoMk_DIR:PATH=D:/_pkg/DPackages/DMujoMk/share/DMujoMk
 
-//The directory containing a CMake configuration file for DMujoMkk.
-DMujoMkk_DIR:PATH=DMujoMkk_DIR-NOTFOUND
-
 //Value Computed by CMake
 DMujoSim_BINARY_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib/build
 
-//The directory containing a CMake configuration file for DMujoSim.
-DMujoSim_DIR:PATH=D:/_pkg/DPackages/DMujoSim/share/DMujoSim
-
 //Value Computed by CMake
 DMujoSim_SOURCE_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib
-
-//The directory containing a CMake configuration file for DMujo.
-DMujo_DIR:PATH=DMujo_DIR-NOTFOUND
-
-//Value Computed by CMake
-ModelMaker_BINARY_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib/build
-
-//Value Computed by CMake
-ModelMaker_SOURCE_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib
 
 
 ########################

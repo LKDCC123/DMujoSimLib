@@ -9,6 +9,7 @@
 #ifndef MUJICOBHR_LIB_CPP
 #define MUJICOBHR_LIB_CPP
 #include "../include/MujocoBHR_api.h"
+#include <DBase.hpp>
 
 //-------------------------------- global -----------------------------------------------
 // blocks
@@ -1684,6 +1685,7 @@ void fnvMujocoSimuLoop(
     double dptJointsVelocity[], 
     int nIMUNum,
     double dRotMat[][9],
+    double dIMU[][3],
     int nFSNum,
     double dptFootFT[][6],
     double dptCmdJointsPosition[],
@@ -1757,7 +1759,10 @@ void fnvMujocoSimuLoop(
                             // d->qpos[7 + nJointNum] = nBlockPosi[0], d->qpos[7 + nJointNum + 1] = nBlockPosi[1], d->qpos[7 + nJointNum + 2] = nBlockPosi[2]; // init block
                         }
                         for(int i = 7; i < m->nq + 7; i++) dptJointsPosition[i - 7] = d->qpos[i], dptJointsVelocity[i - 7] = d->qvel[i]; // read joints
-                        for(int i = 0; i < nIMUNum; i++) for(int j = 0; j < 9; j++) dRotMat[i][j] = d->site_xmat[i * 9 + j]; // read trunk rot mat
+                        for(int i = 0; i < nIMUNum; i++) { 
+                            for(int j = 0; j < 9; j++) dRotMat[i][j] = d->site_xmat[i * 9 + j]; // read trunk rot mat
+                            // _D_BASE fnvSO32Eul(dRotMat[i], dIMU[i]); // transform rotational matrix to eular
+                        }
                         for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[0][j] = d->sensordata[j]; // read footft
                         pfLoop(); // online control loop
                         for(int i = 0; i < m->nq; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 

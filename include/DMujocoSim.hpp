@@ -83,6 +83,7 @@ public:
                 this->m_SimIO->Sen.JointVel,
                 this->m_nIMUNum,
                 this->m_SimIO->Sen.RotMat,
+                this->m_SimIO->Sen.IMU,
                 this->m_nFSNum,
                 this->m_SimIO->Sen.FS,
                 this->m_SimIO->Cmd.JointsPos,

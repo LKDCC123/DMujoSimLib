@@ -38,6 +38,8 @@ void ConLoop() {
     stSimIO.Cmd.JointsPos[12] = __D2R(-25.0);
     stSimIO.Cmd.JointsPos[13] = __D2R(12.5);
     stSimIO.Cmd.JointsPos[14] = 0.0;
+    _STD cout << stSimIO.Sen.IMU[0][0] << _STD endl;
+    _STD cout << stSimIO.Sen.FS[0][0] << _STD endl; // dcc here
   // _STD cout << cMujoSim.m_nKProg << _STD endl;
 }
 

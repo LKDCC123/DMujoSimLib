@@ -6,13 +6,13 @@
  
 # Compute paths
 if(1)
-    set(DMujoSim_INCLUDE_DIR "D:/_pkg/DPackages/DMujoSim/include")
+    set(DMujoSim_INCLUDE_DIR "C:/Program Files (x86)/DMujoSim/DMujoSim/include")
 endif()
 if(1)
-    set(DMujoSim_LIB_DIR     "D:/_pkg/DPackages/DMujoSim/lib"    )
+    set(DMujoSim_LIB_DIR     "C:/Program Files (x86)/DMujoSim/DMujoSim/lib"    )
 endif()
 if(0)
-    set(DMujoSim_SRC_DIR     "D:/_pkg/DPackages/DMujoSim/src"    )
+    set(DMujoSim_SRC_DIR     "C:/Program Files (x86)/DMujoSim/DMujoSim/src"    )
 endif()
 
 # set paths

@@ -2,30 +2,6 @@
 	"entries" : 
 	[
 		{
-			"name" : "7P2_Robot_Sim_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/L.B/GitHUB/DMujoSimLib/build"
-		},
-		{
-			"name" : "7P2_Robot_Sim_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/L.B/GitHUB/DMujoSimLib"
-		},
-		{
 			"name" : "CMAKE_CACHEFILE_DIR",
 			"properties" : 
 			[
@@ -499,7 +475,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "D:/_pkg/DPackages"
+			"value" : "C:/Program Files (x86)/DMujoSim"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -1038,18 +1014,6 @@
 			"value" : "D:/_pkg/DPackages/DMujoMk/share/DMujoMk"
 		},
 		{
-			"name" : "DMujoMkk_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for DMujoMkk."
-				}
-			],
-			"type" : "PATH",
-			"value" : "DMujoMkk_DIR-NOTFOUND"
-		},
-		{
 			"name" : "DMujoSim_BINARY_DIR",
 			"properties" : 
 			[
@@ -1062,55 +1026,7 @@
 			"value" : "D:/L.B/GitHUB/DMujoSimLib/build"
 		},
 		{
-			"name" : "DMujoSim_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for DMujoSim."
-				}
-			],
-			"type" : "PATH",
-			"value" : "D:/_pkg/DPackages/DMujoSim/share/DMujoSim"
-		},
-		{
 			"name" : "DMujoSim_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/L.B/GitHUB/DMujoSimLib"
-		},
-		{
-			"name" : "DMujo_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for DMujo."
-				}
-			],
-			"type" : "PATH",
-			"value" : "DMujo_DIR-NOTFOUND"
-		},
-		{
-			"name" : "ModelMaker_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/L.B/GitHUB/DMujoSimLib/build"
-		},
-		{
-			"name" : "ModelMaker_SOURCE_DIR",
 			"properties" : 
 			[
 				{
