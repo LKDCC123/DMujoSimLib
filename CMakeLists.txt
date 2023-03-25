@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 project(DMujoSim)
 
 message("${CMAKE_PREFIX_PATH}")
-set(BuldeAndInstall 0)
-set(TestLib 1)
+set(BuldeAndInstall 1)
+set(TestLib 0)
 
 # BuldeAndInstall ------------------------------------------------------------------------------------------------------- 
 if(${BuldeAndInstall})

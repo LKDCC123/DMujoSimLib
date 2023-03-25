@@ -6,6 +6,7 @@
 			[
 				{
 					"build" : ".",
+					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -16,7 +17,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -33,7 +35,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -42,15 +45,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Debug-c5531c31826c09cd5526.json",
+					"jsonFile" : "target-ALL_BUILD-Debug-2e0704b54f98266661e7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "TestLib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TestLib-Debug-917d78aa424e2453f649.json",
-					"name" : "TestLib",
+					"id" : "DMujoSim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DMujoSim-Debug-316b8ac20bcb4941f08c.json",
+					"name" : "DMujoSim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test-Debug-4286fe0405bbea026c44.json",
+					"name" : "Test",
 					"projectIndex" : 0
 				},
 				{
@@ -67,6 +77,7 @@
 			[
 				{
 					"build" : ".",
+					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -77,7 +88,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -94,7 +106,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -103,15 +116,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-Release-c5531c31826c09cd5526.json",
+					"jsonFile" : "target-ALL_BUILD-Release-2e0704b54f98266661e7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "TestLib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TestLib-Release-23c2ea4e1459b5258e1d.json",
-					"name" : "TestLib",
+					"id" : "DMujoSim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DMujoSim-Release-9f7943258d63ebe153a5.json",
+					"name" : "DMujoSim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test-Release-48a441c85c9ba9a730cc.json",
+					"name" : "Test",
 					"projectIndex" : 0
 				},
 				{
@@ -128,6 +148,7 @@
 			[
 				{
 					"build" : ".",
+					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -138,7 +159,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -155,7 +177,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -164,15 +187,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-MinSizeRel-c5531c31826c09cd5526.json",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-2e0704b54f98266661e7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "TestLib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TestLib-MinSizeRel-7dfc3ecc2232876e72ac.json",
-					"name" : "TestLib",
+					"id" : "DMujoSim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DMujoSim-MinSizeRel-5b175f1258d2f997ae32.json",
+					"name" : "DMujoSim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test-MinSizeRel-b54ddec9e93e75271e53.json",
+					"name" : "Test",
 					"projectIndex" : 0
 				},
 				{
@@ -189,6 +219,7 @@
 			[
 				{
 					"build" : ".",
+					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -199,7 +230,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -216,7 +248,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -225,15 +258,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-c5531c31826c09cd5526.json",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-2e0704b54f98266661e7.json",
 					"name" : "ALL_BUILD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "TestLib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TestLib-RelWithDebInfo-7b41d0d102697d73ee6a.json",
-					"name" : "TestLib",
+					"id" : "DMujoSim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DMujoSim-RelWithDebInfo-b0dd3b607c94a521607f.json",
+					"name" : "DMujoSim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Test-RelWithDebInfo-62dc183666eada53a2bf.json",
+					"name" : "Test",
 					"projectIndex" : 0
 				},
 				{

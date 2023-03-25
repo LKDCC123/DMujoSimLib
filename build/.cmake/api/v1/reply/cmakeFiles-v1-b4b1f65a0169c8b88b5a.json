@@ -129,8 +129,14 @@
 			"path" : "D:/_pkg/DPackages/DBase/share/DBase/DBaseConfig.cmake"
 		},
 		{
-			"isExternal" : true,
-			"path" : "D:/_pkg/DPackages/DMujoSim/share/DMujoSim/DMujoSimConfig.cmake"
+			"path" : "config.cmake"
+		},
+		{
+			"path" : "config.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/DMujoSimConfig.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
