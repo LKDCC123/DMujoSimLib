@@ -13,6 +13,7 @@ _D_MUJOSIM_BEGIN
 
 struct st_SimInit {
     double JointsDirection[__MaxJointNum]; // init the joints' direction
+    double ForceSDirection[__MaxFSNum][6]; // init the force sensors' direction
     double JointsInitSpc[__MaxJointNum + __FloatingBaseNum]; // init the state of the robot
 };
 
@@ -86,6 +87,7 @@ public:
                 this->m_SimIO->Sen.IMU,
                 this->m_nFSNum,
                 this->m_SimIO->Sen.FS,
+                this->m_SimIOInit->ForceSDirection,
                 this->m_SimIO->Cmd.JointsPos,
                 this->m_SimIOInit->JointsDirection,
                 &this->m_nKProg,

@@ -5,7 +5,7 @@ message("${CMAKE_PREFIX_PATH}")
 set(BuldeAndInstall 1)
 set(TestLib 0)
 
-# BuldeAndInstall ------------------------------------------------------------------------------------------------------- 
+# # BuldeAndInstall ------------------------------------------------------------------------------------------------------- 
 if(${BuldeAndInstall})
 
 find_package(DMujoMk)
@@ -60,5 +60,16 @@ find_package(DMujoSim)
 add_executable(TestLib
     Test.cpp
 )
+
+target_link_libraries(TestLib 
+    glfw3.lib
+    mujoco200.lib
+    DMujoSim.lib)
+
+# link_libraries(@PROJECT_NAME@.lib)
+    # link_libraries(glfw3.lib)
+    # link_libraries(mujoco200.lib)
+
+target_compile_options(TestLib PUBLIC /MT)
 
 endif()

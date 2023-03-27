@@ -74,7 +74,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/DMujoSim
+CMAKE_INSTALL_PREFIX:PATH=D:/_pkg/DPackages
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/bin/Hostx64/x64/link.exe
@@ -193,6 +193,9 @@ DMujoMk_DIR:PATH=D:/_pkg/DPackages/DMujoMk/share/DMujoMk
 
 //Value Computed by CMake
 DMujoSim_BINARY_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib/build
+
+//The directory containing a CMake configuration file for DMujoSim.
+DMujoSim_DIR:PATH=D:/_pkg/DPackages/DMujoSim/share/DMujoSim
 
 //Value Computed by CMake
 DMujoSim_SOURCE_DIR:STATIC=D:/L.B/GitHUB/DMujoSimLib

@@ -1688,6 +1688,7 @@ void fnvMujocoSimuLoop(
     double dIMU[][3],
     int nFSNum,
     double dptFootFT[][6],
+    double dptFSDirection[][6],
     double dptCmdJointsPosition[],
     double _dJointsDirection[],
     int * nKpre,
@@ -1761,9 +1762,9 @@ void fnvMujocoSimuLoop(
                         for(int i = 7; i < m->nq + 7; i++) dptJointsPosition[i - 7] = d->qpos[i], dptJointsVelocity[i - 7] = d->qvel[i]; // read joints
                         for(int i = 0; i < nIMUNum; i++) { 
                             for(int j = 0; j < 9; j++) dRotMat[i][j] = d->site_xmat[i * 9 + j]; // read trunk rot mat
-                            // _D_BASE fnvSO32Eul(dRotMat[i], dIMU[i]); // transform rotational matrix to eular
+                            _D_BASE fnvSO32Eul(dRotMat[i], dIMU[i]); // transform rotational matrix to eular
                         }
-                        for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[0][j] = d->sensordata[j]; // read footft
+                        for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[i][j] = d->sensordata[i * 6 + j] * dptFSDirection[i][j]; // read footft
                         pfLoop(); // online control loop
                         for(int i = 0; i < m->nq; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 
                         *nKpre += 1;
