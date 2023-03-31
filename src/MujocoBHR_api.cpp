@@ -1755,7 +1755,7 @@ void fnvMujocoSimuLoop(
 
                         // online control for BHR s --------------------------------------------------------------------
                         if(*nKpre == 0) {
-                            for(int i = 1; i < 7; i++) d->qpos[i] = _dJointsInitPos[i]; // init floating base
+                            for(int i = 0; i < 7; i++) d->qpos[i] = _dJointsInitPos[i]; // init floating base
                             for(int i = 7; i < m->nq + 7; i++) d->qpos[i] = _dJointsInitPos[i] * _dJointsDirection[i - 7]; // init joints
                             // d->qpos[7 + nJointNum] = nBlockPosi[0], d->qpos[7 + nJointNum + 1] = nBlockPosi[1], d->qpos[7 + nJointNum + 2] = nBlockPosi[2]; // init block
                         }

@@ -20,6 +20,7 @@ struct st_SimInit {
 struct st_SimIO {
     struct { // input to the Mujoco simulation
         double JointsPos[__MaxJointNum];
+        
     }Cmd; 
     struct { // output from the Mujoco simulation
         double RotMat[__MaxIMUNum][9]; // rotmat is received from mujoco
@@ -100,6 +101,17 @@ public:
             return true;
         }
         else return false;
+    }
+
+    // create a new thread to get key and for users' print
+    bool Hmi(void (*pfPrint)(void)) {
+
+    }
+
+    // exit the simulation
+    bool Quit() {
+        settings.exitrequest = 1;
+        return true;
     }
 
 private:
