@@ -135,6 +135,7 @@ public:
             // end simulation
             fnvMujocoSimuEnd();
             MujocoSimThread.join(); 
+            ThPrint.join();
             return true;
         }
         else return false;
