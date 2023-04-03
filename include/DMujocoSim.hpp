@@ -6,6 +6,8 @@
 #ifndef DMUJOCOSIM_HPP
 #define DMUJOCOSIM_HPP
 #include "DMujoHeader.h"
+#include <thread>
+#include <conio.h>
 
 _D_MUJOSIM_BEGIN
 
@@ -20,7 +22,6 @@ struct st_SimInit {
 struct st_SimIO {
     struct { // input to the Mujoco simulation
         double JointsPos[__MaxJointNum];
-
     }Cmd; 
     struct { // output from the Mujoco simulation
         double RotMat[__MaxIMUNum][9]; // rotmat is received from mujoco
@@ -31,6 +32,28 @@ struct st_SimIO {
     }Sen; 
 };
 
+static COORD OutChar;
+static HANDLE hOut;
+// create a new thread to get key and for users' print
+void fnvHmi(
+    int *nKey,
+    int *nKeyFetched,
+    void (*pfPrint)(void)) {
+    OutChar.X = 0;
+    OutChar.Y = 0;
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    system("cls");
+    while(!settings.exitrequest) {
+        SetConsoleCursorPosition(hOut, OutChar);
+        if(*nKeyFetched) *nKey = *nKeyFetched = 0; // if key is fetched by the user, clear the key
+        if(_kbhit()) *nKey = _getch(); // if key pressed, set key
+        if(pfPrint != NULL) pfPrint(); // run the users print function
+        Sleep(30);
+        if(*nKey == '\\') system("cls"); // clear the print
+        if(*nKey == ' ') settings.exitrequest = 1; // quit simulation
+    }
+}
+
 #define _MMk    c_MMaker::
 
 class c_MujoSim:public c_MMaker {
@@ -38,6 +61,8 @@ public:
     int m_nKProg = 0;
     c_MujoSim(const char * cptModelName, double dTimeStep, int nIfGravity):c_MMaker(cptModelName, dTimeStep, nIfGravity) {
         this->m_cptModName = cptModelName;
+        this->m_nKey = 0;
+        this->m_nKeyFetched = 0;
     }
 
     ~c_MujoSim() {
@@ -60,11 +85,13 @@ public:
         strcat(cptFullPath, this->m_cptModName); // get the full path of the external model
         strcat(cptFullPath, ".xml"); 
         _STD cout << "Reading model from: " << cptFullPath << _STD endl;
+        _STD cout << "Mujoco is ready!!" << _STD endl;
+        _STD cout << "Press enter to continue..." << _STD endl;
+        getchar();
         fnvMujocoSimuInit(1, cptFullPath); // set model
         this->m_SimIO = stptSimIO;
         this->m_SimIOInit = stptSimInit;
         this->m_nInitFlag = true;
-        _STD cout << "Mujoco is ready!!" << _STD endl;
         return true;
     }
 
@@ -80,10 +107,15 @@ public:
         return true;
     }
 
-    // run simulation
-    bool Run(void (*pfLoop)(void)) {
+    // run simulation, press space to quit
+    bool Run(void (*pfLoop)(void), void (*pfPrint)(void)) {
+        _STD thread ThPrint(
+            fnvHmi, 
+            &this->m_nKey,
+            &this->m_nKeyFetched,
+            pfPrint); // start the hmi in a new thread
         if(this->m_nInitFlag) {
-            std::thread MujocoSimThread(
+            _STD thread MujocoSimThread(
                 fnvMujocoSimuLoop,
                 this->m_nJointNum,
                 this->m_SimIOInit->JointsInitSpc,
@@ -98,8 +130,7 @@ public:
                 this->m_SimIO->Cmd.JointsPos,
                 this->m_SimIOInit->JointsDirection,
                 &this->m_nKProg,
-                pfLoop  
-                ); // start simulation in a background thread
+                pfLoop); // start simulation in a new thread
             while (!glfwWindowShouldClose(MJwindow) && !settings.exitrequest) fnvMujocoRenderLoop(); // render loop in the current thread
             // end simulation
             fnvMujocoSimuEnd();
@@ -109,24 +140,25 @@ public:
         else return false;
     }
 
-    // create a new thread to get key and for users' print
-    bool Hmi(void (*pfPrint)(void)) {
-
-    }
-
-    // exit the simulation
-    bool Quit() {
-        settings.exitrequest = 1;
-        return true;
+    // fetch the key in users function and clear the key
+    int GetKey() {
+        this->m_nKeyFetched = 1;
+        return this->m_nKey;
     }
 
 private:
     int m_nInitFlag;
     int m_nErrorFlag;
+    int m_nKey;
+    int m_nKeyFetched;
     const char * m_cptModName;
     double m_dTimeStep;
     st_SimIO * m_SimIO;
     st_SimInit * m_SimIOInit;
+    bool fnbClearKey() {
+        this->m_nKey = 0;
+        return true;
+    }
 };
 
 _D_MUJOSIM_END

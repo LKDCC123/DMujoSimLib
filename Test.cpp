@@ -44,9 +44,14 @@ void ConLoop() {
     stSimIO.Cmd.JointsPos[13] = __D2R(12.5);
     stSimIO.Cmd.JointsPos[14] = 0.0;
     // _STD cout << __R2D(stSimIO.Sen.IMU[0][0]) << ", " << __R2D(stSimIO.Sen.IMU[0][1]) << _STD endl;
-    int nF = 4;
+    // int nF = 4;
     // _STD cout << stSimIO.Sen.FS[0][nF] << ", " << stSimIO.Sen.FS[1][nF] << _STD endl; // dcc here
-  // _STD cout << cMujoSim.m_nKProg << _STD endl;
+    // _STD cout << cMujoSim.m_nKProg << _STD endl;
+}
+
+void fnvPrint() {
+  int hehe = cMujoSim.GetKey();
+  printf("\t%c\n", hehe);
 }
 
 void main() {
@@ -117,5 +122,5 @@ void main() {
 
     cMujoSim.Init(&stSimInit, &stSimIO);
 
-    cMujoSim.Run(ConLoop);
+    cMujoSim.Run(ConLoop, fnvPrint);
 }
