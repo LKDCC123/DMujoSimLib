@@ -102,15 +102,13 @@
 				</body>
 			</body>
 		</body>
-		<body name = "block_0" pos = "1.000000 1.000000 0.010000" euler = "0.000000 0.000000 0.100000">
-			<inertial pos = "0 0 0" mass = "10.000000" diaginertia = "0.833667 0.833667 1.666667"/>
-			<freejoint name = "block_0_freejoint"/>
-			<geom name = "block_0_geom" type = "box" size = "0.500000 0.500000 0.010000" rgba = "0.5 0.2 0.2 1"/>
+		<body name = "block_0" pos = "1.000000 1.000000 0.050000" euler = "0.100000 0.100000 0.100000">
+			<inertial pos = "0 0 0" mass = "100" diaginertia = "1 1 1"/>
+			<geom name = "block_0_geom" type = "box" size = "0.500000 0.500000 0.050000" rgba = "0.5 0.2 0.2 1"/>
 		</body>
-		<body name = "block_" pos = "2.000000 2.000000 0.010000" euler = "0.000000 0.000000 0.000000">
-			<inertial pos = "0 0 0" mass = "10.000000" diaginertia = "0.833667 0.833667 1.666667"/>
-			<freejoint name = "block__freejoint"/>
-			<geom name = "block__geom" type = "box" size = "0.500000 0.500000 0.010000" rgba = "0.5 0.2 0.2 1"/>
+		<body name = "block_" pos = "2.000000 2.000000 0.150000" euler = "0.000000 0.000000 0.000000">
+			<inertial pos = "0 0 0" mass = "100" diaginertia = "1 1 1"/>
+			<geom name = "block__geom" type = "box" size = "0.500000 0.500000 0.050000" rgba = "0.5 0.2 0.2 1"/>
 		</body>
 	</worldbody>
 

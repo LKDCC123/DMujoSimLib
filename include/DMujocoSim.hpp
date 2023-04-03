@@ -20,7 +20,7 @@ struct st_SimInit {
 struct st_SimIO {
     struct { // input to the Mujoco simulation
         double JointsPos[__MaxJointNum];
-        
+
     }Cmd; 
     struct { // output from the Mujoco simulation
         double RotMat[__MaxIMUNum][9]; // rotmat is received from mujoco
@@ -44,10 +44,16 @@ public:
 
     }
 
-    // using external model
-    bool Init(st_SimInit * stptSimInit, st_SimIO * stptSimIO, const char * cptModelPath) { // transfer data: pointer set
+    // make .xml file only
+    bool MakeModel() {
         this->_MMk fnvWriteXML(); // wirte the .xml file for the simualtion
         this->_MMk fnvDisp(); // display the number of bodies and joints
+        return true;
+    }
+
+    // using external model
+    bool Init(st_SimInit * stptSimInit, st_SimIO * stptSimIO, const char * cptModelPath) { // transfer data: pointer set
+        this->MakeModel();
         char cptFullPath[__MaxStrLen];
         strcpy(cptFullPath, cptModelPath);
         strcat(cptFullPath, "/");

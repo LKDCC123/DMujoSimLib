@@ -112,8 +112,8 @@ void main() {
     cMujoSim.fnvExContact("rthigh", "rankle");
     cMujoSim.fnvExContact("rshank", "rankle");
 
-    cMujoSim.fnvBuildBlock(10.0, {1.0, 1.0, 0.02}, {1.0, 1.0, 0.01}, {0.0, 0.0, 0.1});
-    cMujoSim.fnvBuildBlock(10.0, {1.0, 1.0, 0.02}, {2.0, 2.0, 0.01}, {0.0, 0.0, 0.0});
+    cMujoSim.fnvBuildBlock(0.0, {1.0, 1.0, 0.1}, {1.0, 1.0, 0.05}, {0.1, 0.1, 0.1});
+    cMujoSim.fnvBuildBlock(0.0, {1.0, 1.0, 0.1}, {2.0, 2.0, 0.15}, {0.0, 0.0, 0.0});
 
     cMujoSim.Init(&stSimInit, &stSimIO);
 
