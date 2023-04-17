@@ -1765,7 +1765,8 @@ void fnvMujocoSimuLoop(
                         }
                         for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[i][j] = d->sensordata[i * 6 + j] * dptFSDirection[i][j]; // read footft
                         pfLoop(); // online control loop
-                        for(int i = 0; i < nJointNum; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 
+                        // for(int i = 0; i < nJointNum; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 
+                        for(int i = 0; i < nJointNum; i++) d->qfrc_applied[i + 6] = dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints, 
                         *nKpre += 1;
                         // online control for BHR e --------------------------------------------------------------------
 
