@@ -25,7 +25,7 @@ st_SimInit stSimInit = {
 
 st_SimIO stSimIO;
 
-c_MujoSim cMujoSim("Test", 0.004, 1);
+c_MujoSim cMujoSim("Test", 0.004, 0, 1);
 
 void ConLoop() {
     stSimIO.Cmd.JointsPos[0] = 0.0;

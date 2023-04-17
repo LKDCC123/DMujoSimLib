@@ -71,6 +71,7 @@ void fnvMujocoSimuLoop(
     double dptFSDirection[][6],
     double dptCmdJointsPosition[],
     double _dJointsDirection[],
+    int nMotorMod,
     int * nKpre,
     void (* pfLoop)(void)
     );

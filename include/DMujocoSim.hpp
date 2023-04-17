@@ -59,7 +59,7 @@ void fnvHmi(
 class c_MujoSim:public c_MMaker {
 public:
     int m_nKProg = 0;
-    c_MujoSim(const char * cptModelName, double dTimeStep, int nIfGravity):c_MMaker(cptModelName, dTimeStep, nIfGravity) {
+    c_MujoSim(const char * cptModelName, double dTimeStep,  int nMotorMod, int nIfGravity):c_MMaker(cptModelName, dTimeStep, nMotorMod, nIfGravity) {
         this->m_cptModName = cptModelName;
         this->m_nKey = 0;
         this->m_nKeyFetched = 0;
@@ -129,6 +129,7 @@ public:
                 this->m_SimIOInit->ForceSDirection,
                 this->m_SimIO->Cmd.JointsPos,
                 this->m_SimIOInit->JointsDirection,
+                this->_MMk m_nMotorMod,
                 &this->m_nKProg,
                 pfLoop); // start simulation in a new thread
             while (!glfwWindowShouldClose(MJwindow) && !settings.exitrequest) fnvMujocoRenderLoop(); // render loop in the current thread
