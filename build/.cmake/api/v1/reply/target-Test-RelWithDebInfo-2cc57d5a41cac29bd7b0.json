@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/Test.exe"
+			"path" : "RelWithDebInfo/Test.exe"
 		},
 		{
-			"path" : "Release/Test.pdb"
+			"path" : "RelWithDebInfo/Test.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -15,17 +15,17 @@
 		[
 			"add_executable",
 			"link_directories",
+			"find_package",
 			"target_link_libraries",
 			"target_compile_options",
 			"target_compile_definitions",
-			"include_directories",
-			"find_package"
+			"include_directories"
 		],
 		"files" : 
 		[
 			"CMakeLists.txt",
-			"D:/_pkg/DPackages/DMujoMk/share/DMujoMk/DMujoMkConfig.cmake",
-			"D:/_pkg/DPackages/DBase/share/DBase/DBaseConfig.cmake"
+			"D:/_pkg/DPackages/DBase/share/DBase/DBaseConfig.cmake",
+			"D:/_pkg/DPackages/DMujoMk/share/DMujoMk/DMujoMkConfig.cmake"
 		],
 		"nodes" : 
 		[
@@ -39,49 +39,49 @@
 				"parent" : 0
 			},
 			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 25,
+				"parent" : 3
+			},
+			{
 				"command" : 1,
 				"file" : 0,
 				"line" : 18,
 				"parent" : 0
 			},
 			{
-				"command" : 2,
+				"command" : 3,
 				"file" : 0,
 				"line" : 41,
 				"parent" : 0
 			},
 			{
-				"command" : 3,
+				"command" : 4,
 				"file" : 0,
 				"line" : 37,
 				"parent" : 0
 			},
 			{
-				"command" : 4,
+				"command" : 5,
 				"file" : 0,
 				"line" : 30,
 				"parent" : 0
 			},
 			{
-				"command" : 6,
+				"command" : 2,
 				"file" : 0,
 				"line" : 11,
-				"parent" : 0
-			},
-			{
-				"file" : 1,
-				"parent" : 6
-			},
-			{
-				"command" : 5,
-				"file" : 1,
-				"line" : 21,
-				"parent" : 7
-			},
-			{
-				"command" : 6,
-				"file" : 0,
-				"line" : 12,
 				"parent" : 0
 			},
 			{
@@ -89,13 +89,19 @@
 				"parent" : 9
 			},
 			{
-				"command" : 5,
+				"command" : 6,
 				"file" : 2,
 				"line" : 21,
 				"parent" : 10
 			},
 			{
-				"command" : 5,
+				"command" : 6,
+				"file" : 1,
+				"line" : 21,
+				"parent" : 3
+			},
+			{
+				"command" : 6,
 				"file" : 0,
 				"line" : 14,
 				"parent" : 0
@@ -108,44 +114,44 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG  "
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG  "
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 7,
 					"fragment" : "/nologo"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "CONSOLE"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "NDEBUG"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "UNICODE"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "_CRT_SECURE_NO_WARNINGS"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 8,
+					"backtrace" : 11,
 					"path" : "D:/_pkg/DPackages/DMujoMk/include"
 				},
 				{
-					"backtrace" : 11,
+					"backtrace" : 12,
 					"path" : "D:/_pkg/DPackages/DBase/include"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 13,
 					"path" : "D:/L.B/GitHUB/DMujoSimLib/include"
 				}
 			],
@@ -160,44 +166,44 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /MD /O2 /Ob2 /DNDEBUG  "
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /MD /Zi /O2 /Ob1 /DNDEBUG  "
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 7,
 					"fragment" : "/nologo"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "CONSOLE"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "NDEBUG"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "UNICODE"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 8,
 					"define" : "_CRT_SECURE_NO_WARNINGS"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 8,
+					"backtrace" : 11,
 					"path" : "D:/_pkg/DPackages/DMujoMk/include"
 				},
 				{
-					"backtrace" : 11,
+					"backtrace" : 12,
 					"path" : "D:/_pkg/DPackages/DBase/include"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 13,
 					"path" : "D:/L.B/GitHUB/DMujoSimLib/include"
 				}
 			],
@@ -220,25 +226,30 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
 				"role" : "flags"
 			},
 			{
-				"backtrace" : 2,
+				"backtrace" : 4,
+				"fragment" : "-LIBPATH:D:\\_pkg\\DPackages\\DBase\\lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
 				"fragment" : "-LIBPATH:D:\\L.B\\GitHUB\\DMujoSimLib\\bin",
 				"role" : "libraryPath"
 			},
 			{
-				"backtrace" : 3,
+				"backtrace" : 6,
 				"fragment" : "glfw3.lib",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 3,
+				"backtrace" : 6,
 				"fragment" : "mujoco200.lib",
 				"role" : "libraries"
 			},

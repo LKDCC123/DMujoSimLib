@@ -12,6 +12,7 @@
 _D_MUJOSIM_BEGIN
 
 #define __FloatingBaseNum 7 // quaternion and position of the floating base
+#define __MaxFrcNum 10
 
 struct st_SimInit {
     double JointsDirection[__MaxJointNum]; // init the joints' direction
@@ -92,6 +93,7 @@ public:
         this->m_SimIO = stptSimIO;
         this->m_SimIOInit = stptSimInit;
         this->m_nInitFlag = true;
+        this->m_nForceNum = 0;
         return true;
     }
 
@@ -130,6 +132,9 @@ public:
                 this->m_SimIO->Cmd.JointsPos,
                 this->m_SimIOInit->JointsDirection,
                 this->_MMk m_nMotorMod,
+                this->m_nForceNum,
+                this->m_stForce,
+                this->m_nKey,
                 &this->m_nKProg,
                 pfLoop); // start simulation in a new thread
             while (!glfwWindowShouldClose(MJwindow) && !settings.exitrequest) fnvMujocoRenderLoop(); // render loop in the current thread
@@ -142,6 +147,38 @@ public:
         else return false;
     }
 
+    // add push force on certain body at the right timing 
+    bool AddForce(char * cptBodyName, double3 dFrc, double dSpan, double dTiming) {
+        for(int i = 0; i < this->_MMk m_nBodyNum; i++) {
+            if(strcmp(cptBodyName, this->_MMk m_stBodysInfo[i].bodyName) == 0) {
+                this->m_stForce->nBodyNum = i;
+                for(int j = 0; j < 3; j++) this->m_stForce->dForce[j] = dFrc[j];
+                this->m_stForce->dTiming[0] = dTiming, this->m_stForce->dTiming[1] = dTiming + dSpan;
+                this->m_stForce->nKey = 0;
+                this->m_nForceNum++;
+                return true;
+            }
+        }
+        _STD cout << "Wrong body name!!" << _STD endl;
+        return false;
+    }
+
+    // add push force on certain body triggered by a pressed key // Todo
+    // bool AddForce(char * cptBodyName, double3 dFrc, double dSpan, int nKeyTriger) {
+    //     for(int i = 0; i < this->_MMk m_nBodyNum; i++) {
+    //         if(strcmp(cptBodyName, this->_MMk m_stBodysInfo[i].bodyName) == 0) {
+    //             this->m_stForce->nBodyNum = i;
+    //             for(int j = 0; j < 3; j++) this->m_stForce->dForce[j] = dFrc[j];
+    //             this->m_stForce->dTiming[0] = 0.0, this->m_stForce->dTiming[1] = dSpan;
+    //             this->m_stForce->nKey = nKeyTriger;
+    //             this->m_nForceNum++;
+    //             return true;
+    //         }
+    //     }
+    //     _STD cout << "Wrong body name!!" << _STD endl;
+    //     return false;
+    // }
+
     // fetch the key in users function and clear the key
     int GetKey() {
         this->m_nKeyFetched = 1;
@@ -152,11 +189,13 @@ private:
     int m_nInitFlag;
     int m_nErrorFlag;
     int m_nKey;
-    int m_nKeyFetched;
+    int m_nKeyFetched; // if the key command is fetched and only fetched once by external users code, clear the key command
     const char * m_cptModName;
     double m_dTimeStep;
     st_SimIO * m_SimIO;
     st_SimInit * m_SimIOInit;
+    st_Force m_stForce[__MaxFrcNum];
+    int m_nForceNum;
     bool fnbClearKey() {
         this->m_nKey = 0;
         return true;

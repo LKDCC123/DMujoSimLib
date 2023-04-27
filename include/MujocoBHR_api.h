@@ -16,7 +16,15 @@
 #include <mutex>
 #include <chrono>
 
-//-------------------------------- global -----------------------------------------------
+//-------------------------------- defines -----------------------------------------------
+struct st_Force {
+    int nBodyNum;
+    double dForce[3];
+    double dTiming[2];
+    int nKey;
+};
+
+//-------------------------------- global -----------------------------------------------_
 // OpenGL rendering and UI
 Extern GLFWwindow* MJwindow;
 
@@ -72,6 +80,9 @@ void fnvMujocoSimuLoop(
     double dptCmdJointsPosition[],
     double _dJointsDirection[],
     int nMotorMod,
+    int nForceNum,
+    st_Force stForce[],
+    int nKey,
     int * nKpre,
     void (* pfLoop)(void)
     );

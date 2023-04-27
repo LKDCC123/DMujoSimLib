@@ -10,7 +10,6 @@
 #define MUJICOBHR_LIB_CPP
 #include "../include/MujocoBHR_api.h"
 #include <DBase.hpp>
-
 //-------------------------------- global -----------------------------------------------
 // blocks
 // double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
@@ -1692,6 +1691,9 @@ void fnvMujocoSimuLoop(
     double dptCmdJointsPosition[],
     double _dJointsDirection[],
     int nMotorMod,
+    int nForceNum,
+    st_Force stForce[],
+    int nKey,
     int * nKpre,
     void (* pfLoop)(void)
     ) // simulate in background thread (while rendering in main thread), your control should be added in this function
@@ -1771,7 +1773,17 @@ void fnvMujocoSimuLoop(
                         else printf("Wrong motor mod in simulation!!\n");
                         *nKpre += 1;
                         // online control for BHR e --------------------------------------------------------------------
-
+                        // push force
+                        for(int i = 0; i < nForceNum; i++) {
+                            if(stForce[i].nKey == 0) { // force triggered by time
+                                if(d->time >= stForce[i].dTiming[0] && d->time < stForce[i].dTiming[1]) for(int j = 0; j < 3; j++) d->xfrc_applied[6 * stForce->nBodyNum + j] = stForce[i].dForce[j];
+                            }
+                            if(stForce[i].nKey != 0) { // force triggered by key
+                                if(nKey == stForce[i].nKey) stForce[i].dTiming[1] = d->time + (stForce[i].dTiming[1] - stForce[i].dTiming[0]), stForce[i].dTiming[0] = d->time; 
+                                if(d->time >= stForce[i].dTiming[0] && d->time < stForce[i].dTiming[1]) for(int j = 0; j < 3; j++) d->xfrc_applied[6 * stForce->nBodyNum + j] = stForce->dForce[j];
+                            }
+                            nKey = 0;
+                        }
                         // run mj_step
                         mjtNum prevtm = d->time;
                         mj_step(m, d);
