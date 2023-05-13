@@ -180,7 +180,7 @@ public:
     // }
 
     // fetch the key in users function and clear the key
-    int GetKey() {
+    const int &GetKey() {
         this->m_nKeyFetched = 1;
         return this->m_nKey;
     }
