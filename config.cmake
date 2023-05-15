@@ -3,6 +3,7 @@ set(PKG_NAME DMujoSim)
 set(${PKG_NAME}_INCLUDE_ON  1)
 set(${PKG_NAME}_LIB_ON      1)
 set(${PKG_NAME}_SRC_ON      0)
+set(CMAKE_INSTALL_PREFIX "D:/Packages/DPackages")
 # ---------------------------------
 set(PKG_DIR ${CMAKE_SOURCE_DIR})
 message("-- Package name is: ${PKG_NAME}")
