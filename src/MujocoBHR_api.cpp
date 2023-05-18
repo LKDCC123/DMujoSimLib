@@ -10,6 +10,8 @@
 #define MUJICOBHR_LIB_CPP
 #include "../include/MujocoBHR_api.h"
 #include <DBase.hpp>
+#include <QMujoConfig.h>
+#include <DMujocoSim.hpp>
 //-------------------------------- global -----------------------------------------------
 // blocks
 // double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
@@ -893,17 +895,30 @@ void makesections(void) // make model-dependent UI sections
     makecontrol(oldstate1[SECT_CONTROL]);
 }
 
+st_Camera stCamera; //qhx
 //-------------------------------- utility functions ------------------------------------
 void alignscale(void) // align and scale view
 {
     // autoscale
-    cam.lookat[0] = m->stat.center[0];
-    cam.lookat[1] = m->stat.center[1];
-    cam.lookat[2] = m->stat.center[2];
-    cam.distance = 1.5 * m->stat.extent;
+    cam.lookat[0] = m->stat.center[0] + stCamera.focus[0];
+    cam.lookat[1] = m->stat.center[1] + stCamera.focus[1];
+    cam.lookat[2] = m->stat.center[2] + stCamera.focus[2];
+    cam.distance = stCamera.zoom * m->stat.extent;
 
     // set to free camera
-    cam.type = mjCAMERA_FREE;
+    cam.azimuth = stCamera.azi;
+	cam.elevation = stCamera.ele;
+	cam.type = stCamera.type;
+	if(stCamera.type == mjCAMERA_TRACKING) cam.trackbodyid = stCamera.TrackingID;
+
+    // // autoscale
+    // cam.lookat[0] = m->stat.center[0];
+    // cam.lookat[1] = m->stat.center[1];
+    // cam.lookat[2] = m->stat.center[2];
+    // cam.distance = m->stat.extent;
+
+    // // set to free camera
+	// cam.type = mjCAMERA_FREE;
 }
 
 void copykey(void) // copy qpos to clipboard as key

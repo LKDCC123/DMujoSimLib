@@ -8,6 +8,7 @@
 #include "DMujoHeader.h"
 #include <thread>
 #include <conio.h>
+#include <QMujoConfig.h>
 
 _D_MUJOSIM_BEGIN
 
@@ -183,6 +184,15 @@ public:
     const int &GetKey() {
         this->m_nKeyFetched = 1;
         return this->m_nKey;
+    }
+
+    void setCamera(double focus[3], double zoom, double azimuth, double elevation, int type, int TrackingID) {
+        memcpy(stCamera.focus, focus, sizeof(stCamera.focus));
+        stCamera.zoom = zoom;
+        stCamera.azi = azimuth;
+        stCamera.ele = elevation;
+        stCamera.type = type;
+        stCamera.TrackingID = TrackingID;
     }
 
 private:

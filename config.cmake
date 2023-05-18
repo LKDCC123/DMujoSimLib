@@ -18,7 +18,7 @@ configure_file(Config.cmake.in ${CONFIG_BUILD_FILE} @ONLY)
 configure_file(${CONFIG_BUILD_FILE} ${CONFIG_BUILD_FILE} @ONLY)
 
 if(${PKG_NAME}_INCLUDE_ON) 
-    install(DIRECTORY ${CMAKE_SOURCE_DIR}/include 
+    install(DIRECTORY ${CMAKE_SOURCE_DIR}/include
         DESTINATION  ${CMAKE_INSTALL_PREFIX}/${PKG_NAME}
     )
 endif()
