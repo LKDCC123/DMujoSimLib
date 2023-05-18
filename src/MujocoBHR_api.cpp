@@ -11,7 +11,6 @@
 #include "../include/MujocoBHR_api.h"
 #include <DBase.hpp>
 #include <QMujoConfig.h>
-#include <DMujocoSim.hpp>
 //-------------------------------- global -----------------------------------------------
 // blocks
 // double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
