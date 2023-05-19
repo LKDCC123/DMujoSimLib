@@ -8,9 +8,11 @@
 
 #ifndef MUJICOBHR_LIB_CPP
 #define MUJICOBHR_LIB_CPP
-#include "../include/MujocoBHR_api.h"
+#include <DMujoHeader.h>
+#include <MujocoBHR_api.h>
 #include <DBase.hpp>
 #include <QMujoConfig.h>
+
 //-------------------------------- global -----------------------------------------------
 // blocks
 // double nBlockPosi[3] = { 0.0 * 1.1, 0.0, 0.0 * 0.05 };
@@ -1698,7 +1700,7 @@ void fnvMujocoSimuLoop(
     double dptJointsVelocity[], 
     int nIMUNum,
     double dRotMat[][9],
-    double dIMU[][3],
+    Dcc::MUJOCO_FILES::st_IMU dIMU[],
     int nFSNum,
     double dptFootFT[][6],
     double dptFSDirection[][6],
@@ -1778,9 +1780,16 @@ void fnvMujocoSimuLoop(
                         for(int i = 7; i < nJointNum + 7; i++) dptJointsPosition[i - 7] = d->qpos[i], dptJointsVelocity[i - 7] = d->qvel[i]; // read joints
                         for(int i = 0; i < nIMUNum; i++) { 
                             for(int j = 0; j < 9; j++) dRotMat[i][j] = d->site_xmat[i * 9 + j]; // read trunk rot mat
-                            _D_BASE fnvSO32Eul(dRotMat[i], dIMU[i]); // transform rotational matrix to eular
+                            _D_BASE fnvSO32Eul(dRotMat[i], dIMU[i].Ang.data()); // transform rotational matrix to eular
+
+                            for(int j=0;j<3;j++)
+                            {
+                                dIMU[i].Omg[j] = d->sensordata[i*6+j];
+                                dIMU[i].Acc[j] = d->sensordata[i*6+j+3];
+                            }
                         }
-                        for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[i][j] = d->sensordata[i * 6 + j] * dptFSDirection[i][j]; // read footft
+                        int FT_StartIndex = 6*nIMUNum;
+                        for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[i][j] = d->sensordata[FT_StartIndex+i * 6 + j] * dptFSDirection[i][j]; // read footft
                         pfLoop(); // online control loop
                         if(nMotorMod == 0) for(int i = 0; i < nJointNum; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints position, 
                         else if(nMotorMod == 1) for(int i = 0; i < nJointNum; i++) d->qfrc_applied[i + 6] = dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints torque, 
