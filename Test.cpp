@@ -124,5 +124,13 @@ void main() {
 
     cMujoSim.Init(&stSimInit, &stSimIO);
 
+    double CamFocus[3] = {-1.0, .0, 0.5};
+    cMujoSim.setCamera(CamFocus, 1.0, 90.0, .0, 0, 0);// Focus; Zoom; Azimuth; Elevation; CameraType; TrackingID
+
+    //set defult visible objects
+    cMujoSim.setVisualOptions(VIS_TEXTURE, TRUE);
+    cMujoSim.setVisualOptions(VIS_STATIC, TRUE);
+    cMujoSim.setVisualOptions(VIS_CONTACTFORCE, TRUE);
+    
     cMujoSim.Run(ConLoop, fnvPrint);
 }
