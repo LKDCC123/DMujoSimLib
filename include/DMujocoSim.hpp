@@ -186,13 +186,22 @@ public:
         return this->m_nKey;
     }
 
+    // qhx
     void setCamera(double focus[3], double zoom, double azimuth, double elevation, int type, int TrackingID) {
-        memcpy(stCamera.focus, focus, sizeof(stCamera.focus));
-        stCamera.zoom = zoom;
-        stCamera.azi = azimuth;
-        stCamera.ele = elevation;
-        stCamera.type = type;
-        stCamera.TrackingID = TrackingID;
+        memcpy(q_stCamera.focus, focus, sizeof(q_stCamera.focus));
+        q_stCamera.zoom = zoom;
+        q_stCamera.azi = azimuth;
+        q_stCamera.ele = elevation;
+        q_stCamera.type = type;
+        q_stCamera.TrackingID = TrackingID;
+    }
+
+    void setVisualOptions(int ObjNum, bool Option){
+        q_bVisualOptions[ObjNum] = Option;
+    }
+
+    void setFontScale(int FontScale){
+        q_iFontScale = FontScale;
     }
 
 private:

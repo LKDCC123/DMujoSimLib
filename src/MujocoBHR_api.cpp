@@ -894,21 +894,21 @@ void makesections(void) // make model-dependent UI sections
     makecontrol(oldstate1[SECT_CONTROL]);
 }
 
-st_Camera stCamera; //qhx
+st_Camera q_stCamera; //qhx
 //-------------------------------- utility functions ------------------------------------
 void alignscale(void) // align and scale view
 {
     // autoscale
-    cam.lookat[0] = m->stat.center[0] + stCamera.focus[0];
-    cam.lookat[1] = m->stat.center[1] + stCamera.focus[1];
-    cam.lookat[2] = m->stat.center[2] + stCamera.focus[2];
-    cam.distance = stCamera.zoom * m->stat.extent;
+    cam.lookat[0] = m->stat.center[0] + q_stCamera.focus[0];
+    cam.lookat[1] = m->stat.center[1] + q_stCamera.focus[1];
+    cam.lookat[2] = m->stat.center[2] + q_stCamera.focus[2];
+    cam.distance = q_stCamera.zoom * m->stat.extent;
 
     // set to free camera
-    cam.azimuth = stCamera.azi;
-	cam.elevation = stCamera.ele;
-	cam.type = stCamera.type;
-	if(stCamera.type == mjCAMERA_TRACKING) cam.trackbodyid = stCamera.TrackingID;
+    cam.azimuth = q_stCamera.azi;
+	cam.elevation = q_stCamera.ele;
+	cam.type = q_stCamera.type;
+	if(q_stCamera.type == mjCAMERA_TRACKING) cam.trackbodyid = q_stCamera.TrackingID;
 
     // // autoscale
     // cam.lookat[0] = m->stat.center[0];
@@ -1826,6 +1826,8 @@ void fnvMujocoSimuLoop(
 }
 
 //-------------------------------- init and main ----------------------------------------
+bool q_bVisualOptions[NumOfVISFLAG];
+int q_iFontScale;
 void mjinit() // initalize everything
 {
     // print version, check compatibility
@@ -1871,17 +1873,21 @@ void mjinit() // initalize everything
     profilerinit();
     sensorinit();
 
+    // set defult visual options by qhx
+    for(int i=0; i<mjNVISFLAG; i++) vopt.flags[i] = q_bVisualOptions[i];
+
     // make empty scene
     mjv_defaultScene(&scn);
     mjv_makeScene(NULL, &scn, maxgeom);
 
     // select default font
-    int fontscale = uiFontScale(MJwindow);
-    settings.font = fontscale/50 - 1;
+    // int fontscale = uiFontScale(MJwindow);
+    // settings.font = fontscale/50 - 1;
+    settings.font = q_iFontScale/50 - 1; // qhx
     
     // make empty context
     mjr_defaultContext(&con);
-    mjr_makeContext(NULL, &con, fontscale);
+    mjr_makeContext(NULL, &con, q_iFontScale);
 
     // set GLFW callbacks
     uiSetCallback(MJwindow, &uistate, uiEvent, uiLayout);
