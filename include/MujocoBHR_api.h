@@ -15,6 +15,7 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include "DataType.h"
 
 //-------------------------------- defines -----------------------------------------------
 struct st_Force {
@@ -73,7 +74,7 @@ void fnvMujocoSimuLoop(
     double dptJointsVelocity[], 
     int nIMUNum,
     double dRotMat[][9],
-    double dIMU[][3],
+    Dcc::MUJOCO_FILES::st_IMU dIMU[],
     int nFSNum,
     double dptFootFT[][6],
     double dptFSDirection[][6],

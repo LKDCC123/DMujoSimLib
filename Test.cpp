@@ -52,6 +52,8 @@ void ConLoop() {
 void fnvPrint() {
   int hehe = cMujoSim.GetKey();
   printf("\t%c\n", hehe);
+  printf("Omg: %7.3f, %7.3f, %7.3f\t", stSimIO.Sen.IMU[0].Omg[0], stSimIO.Sen.IMU[0].Omg[1], stSimIO.Sen.IMU[0].Omg[2]);
+  printf("Acc: %7.3f, %7.3f, %7.3f", stSimIO.Sen.IMU[0].Acc[0], stSimIO.Sen.IMU[0].Acc[1], stSimIO.Sen.IMU[0].Acc[2]);
 }
 
 void main() {
