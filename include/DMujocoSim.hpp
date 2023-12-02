@@ -33,6 +33,9 @@ struct st_SimIO {
         double JointPos[__MaxJointNum]; // sensed real joints position
         double JointVel[__MaxJointNum]; // sensed real joints velocity
         double FS[__MaxFSNum][6]; // sensed force sensor [fx, fy, fz, tx, ty ,tz]
+        double IMU_Noise[3];
+        double JointPos_Noise[__MaxJointNum];
+        double JointVel_Noise[__MaxJointNum];
     }Sen; 
 };
 
@@ -139,11 +142,14 @@ public:
                 this->m_stForce,
                 this->m_nKey,
                 &this->m_nKProg,
+                this->m_SimIO->Sen.IMU_Noise,
+                this->m_SimIO->Sen.JointPos_Noise,
+                this->m_SimIO->Sen.JointVel_Noise,
                 pfLoop); // start simulation in a new thread
             while (!glfwWindowShouldClose(MJwindow) && !settings.exitrequest) fnvMujocoRenderLoop(); // render loop in the current thread
             // end simulation
             fnvMujocoSimuEnd();
-            MujocoSimThread.join(); 
+            MujocoSimThread.join();
             ThPrint.join();
             return true;
         }

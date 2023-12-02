@@ -85,6 +85,9 @@ void fnvMujocoSimuLoop(
     st_Force stForce[],
     int nKey,
     int * nKpre,
+    double * dIMU_Noise,
+    double * dJointPos_Noise,
+    double * dJointVel_Noise,
     void (* pfLoop)(void)
     );
 void fnvMujocoRenderLoop(void);
