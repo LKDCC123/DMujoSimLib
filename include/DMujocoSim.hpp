@@ -5,9 +5,12 @@
 #pragma once
 #ifndef DMUJOCOSIM_HPP
 #define DMUJOCOSIM_HPP
-#include "DMujoHeader.h"
 #include <thread>
 #include <conio.h>
+#include <QMujoConfig.h>
+#include "DMujoHeader.h"
+#include "MujocoBHR_api.h"
+#include <DataType.h>
 
 _D_MUJOSIM_BEGIN
 
@@ -26,7 +29,7 @@ struct st_SimIO {
     }Cmd; 
     struct { // output from the Mujoco simulation
         double RotMat[__MaxIMUNum][9]; // rotmat is received from mujoco
-        double IMU[__MaxIMUNum][3]; // decoded rotation: [rot_x, rot_y, rot_z]
+        st_IMU IMU[__MaxIMUNum]; // decoded rotation: [rot_x, rot_y, rot_z]
         double JointPos[__MaxJointNum]; // sensed real joints position
         double JointVel[__MaxJointNum]; // sensed real joints velocity
         double FS[__MaxFSNum][6]; // sensed force sensor [fx, fy, fz, tx, ty ,tz]
@@ -180,9 +183,27 @@ public:
     // }
 
     // fetch the key in users function and clear the key
-    int GetKey() {
+    const int &GetKey() {
         this->m_nKeyFetched = 1;
         return this->m_nKey;
+    }
+
+    // qhx
+    void setCamera(double focus[3], double zoom, double azimuth, double elevation, int type, int TrackingID) {
+        memcpy(q_stCamera.focus, focus, sizeof(q_stCamera.focus));
+        q_stCamera.zoom = zoom;
+        q_stCamera.azi = azimuth;
+        q_stCamera.ele = elevation;
+        q_stCamera.type = type;
+        q_stCamera.TrackingID = TrackingID;
+    }
+
+    void setVisualOptions(int ObjNum, bool Option){
+        q_bVisualOptions[ObjNum] = Option;
+    }
+
+    void setFontScale(int FontScale){
+        q_iFontScale = FontScale;
     }
 
 private:

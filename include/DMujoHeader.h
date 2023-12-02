@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <DModelMaker.hpp>
-#include "MujocoBHR_api.h"
+// #include "MujocoBHR_api.h"
 
 #ifndef __PosCon 
 #define __PosCon 0

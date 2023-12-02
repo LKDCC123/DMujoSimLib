@@ -52,6 +52,8 @@ void ConLoop() {
 void fnvPrint() {
   int hehe = cMujoSim.GetKey();
   printf("\t%c\n", hehe);
+  printf("Omg: %7.3f, %7.3f, %7.3f\t", stSimIO.Sen.IMU[0].Omg[0], stSimIO.Sen.IMU[0].Omg[1], stSimIO.Sen.IMU[0].Omg[2]);
+  printf("Acc: %7.3f, %7.3f, %7.3f", stSimIO.Sen.IMU[0].Acc[0], stSimIO.Sen.IMU[0].Acc[1], stSimIO.Sen.IMU[0].Acc[2]);
 }
 
 void main() {
@@ -122,5 +124,13 @@ void main() {
 
     cMujoSim.Init(&stSimInit, &stSimIO);
 
+    double CamFocus[3] = {-1.0, .0, 0.5};
+    cMujoSim.setCamera(CamFocus, 1.0, 90.0, .0, 0, 0);// Focus; Zoom; Azimuth; Elevation; CameraType; TrackingID
+
+    //set defult visible objects
+    cMujoSim.setVisualOptions(VIS_TEXTURE, TRUE);
+    cMujoSim.setVisualOptions(VIS_STATIC, TRUE);
+    cMujoSim.setVisualOptions(VIS_CONTACTFORCE, TRUE);
+    
     cMujoSim.Run(ConLoop, fnvPrint);
 }

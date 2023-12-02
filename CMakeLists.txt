@@ -8,6 +8,7 @@ set(TestLib 0)
 # # BuldeAndInstall ------------------------------------------------------------------------------------------------------- 
 if(${BuldeAndInstall})
 
+set(CMAKE_PREFIX_PATH "D:/Work/Packages/DPackages")
 find_package(DMujoMk)
 find_package(DBase)
 

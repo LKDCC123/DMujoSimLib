@@ -3,6 +3,7 @@ set(PKG_NAME DMujoSim)
 set(${PKG_NAME}_INCLUDE_ON  1)
 set(${PKG_NAME}_LIB_ON      1)
 set(${PKG_NAME}_SRC_ON      0)
+set(CMAKE_INSTALL_PREFIX "D:/Work/Packages/DPackages")
 # ---------------------------------
 set(PKG_DIR ${CMAKE_SOURCE_DIR})
 message("-- Package name is: ${PKG_NAME}")
@@ -17,7 +18,7 @@ configure_file(Config.cmake.in ${CONFIG_BUILD_FILE} @ONLY)
 configure_file(${CONFIG_BUILD_FILE} ${CONFIG_BUILD_FILE} @ONLY)
 
 if(${PKG_NAME}_INCLUDE_ON) 
-    install(DIRECTORY ${CMAKE_SOURCE_DIR}/include 
+    install(DIRECTORY ${CMAKE_SOURCE_DIR}/include
         DESTINATION  ${CMAKE_INSTALL_PREFIX}/${PKG_NAME}
     )
 endif()
