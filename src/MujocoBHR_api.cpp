@@ -1800,9 +1800,14 @@ void fnvMujocoSimuLoop(
                         dIMU_Noise[0] = atan2(2.0*(Quat[0] * Quat[1] + Quat[2] * Quat[3]), 1.0 - 2.0*(Quat[1]*Quat[1] + Quat[2]*Quat[2]));
 	                    dIMU_Noise[1] = asin(2.0*(Quat[0] * Quat[2] - Quat[3] * Quat[1]));
 	                    dIMU_Noise[2] = atan2(2.0*(Quat[0] * Quat[3] + Quat[1] * Quat[2]), 1.0 - 2.0*(Quat[2]*Quat[2] + Quat[3]*Quat[3]));
-                        for(int i = 0; i < nJointNum; i++) {
-                            dJointPos_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + i];
-                            dJointVel_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + nJointNum + i];
+                        if(*nKpre == 0) {
+                            for (int i = 0; i < nJointNum; i++) dJointPos_Noise[i] = _dJointsInitPos[i + 7] * _dJointsDirection[i];
+                        }
+                        else {
+                            for(int i = 0; i < nJointNum; i++) {
+                                dJointPos_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + i];
+                                dJointVel_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + nJointNum + i];
+                            }
                         }
                         
                         pfLoop(); // online control loop
