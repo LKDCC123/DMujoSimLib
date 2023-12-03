@@ -1793,13 +1793,18 @@ void fnvMujocoSimuLoop(
                         }
                         int FT_StartIndex = 6*nIMUNum;
                         for(int i = 0; i < nFSNum; i++) for(int j = 0; j < 6; j++) dptFootFT[i][j] = d->sensordata[FT_StartIndex+i * 6 + j] * dptFSDirection[i][j]; // read footft
-                        //QHX
+                        //QHX Noise
                         int IMU_Noise_StartIndex = FT_StartIndex + nFSNum*6;
                         double Quat[4];
                         for(int i = 0; i < 4; i++) Quat[i] = d->sensordata[IMU_Noise_StartIndex + i];
                         dIMU_Noise[0] = atan2(2.0*(Quat[0] * Quat[1] + Quat[2] * Quat[3]), 1.0 - 2.0*(Quat[1]*Quat[1] + Quat[2]*Quat[2]));
 	                    dIMU_Noise[1] = asin(2.0*(Quat[0] * Quat[2] - Quat[3] * Quat[1]));
 	                    dIMU_Noise[2] = atan2(2.0*(Quat[0] * Quat[3] + Quat[1] * Quat[2]), 1.0 - 2.0*(Quat[2]*Quat[2] + Quat[3]*Quat[3]));
+                        for(int i = 0; i < nJointNum; i++) {
+                            dJointPos_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + i];
+                            dJointVel_Noise[i] = d->sensordata[IMU_Noise_StartIndex + 4 + nJointNum + i];
+                        }
+                        
                         pfLoop(); // online control loop
                         if(nMotorMod == 0) for(int i = 0; i < nJointNum; i++) d->ctrl[i] = dJointGear * dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints position, 
                         else if(nMotorMod == 1) for(int i = 0; i < nJointNum; i++) d->qfrc_applied[i + 6] = dptCmdJointsPosition[i] * _dJointsDirection[i]; // send joints torque, 
